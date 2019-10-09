@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+    <title>BOOK_INDEX</title>
+</head>
+<body>
+<h1><a href="bookInsert">添加图书信息</a></h1>
+    <table border="1px solid black">
+        <thead>
+            <tr>
+                <th>图书编号</th>
+                <th>图书名字</th>
+                <th>图书价格</th>
+                <th>操作</th>
+            </tr>
+        </thead>
+        <tbody>
+            <tr th:each="book : ${bookList}">
+                <td th:text="${book.id}"></td>
+                <td th:text="${book.bookName}"></td>
+                <td th:text="${book.money}"></td>
+                <td>
+                    <a th:href="@{deleteBook(id=${book.id})}">删除</a>
+                    <a th:href="@{selectUpdateBook(id=${book.id})}">修改</a>
+                </td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+</html>

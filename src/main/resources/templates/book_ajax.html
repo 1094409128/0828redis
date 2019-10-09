@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/thymeleaf-extras-springsecurity4">
+<head>
+    <meta charset="UTF-8">
+
+    <title>Title</title>
+    <script type="text/javascript" src="/jquery-2.1.3.js"></script>
+
+    <script>
+        $(function () {
+            selectBook();
+        });
+
+        function selectBook() {
+            $("#show_table").empty();
+            $.get("bookAddAjax", function (data) {
+                var bookList = data.result;
+                if (data.code == 200) {
+                    var tr = "";
+                    for (var i = 0; i < bookList.length; i++) {
+                        tr +=
+                            "<tr><td>" + bookList[i].id + "</td><td>" + bookList[i].bookName +
+                            "</td><td>" + bookList[i].money +
+                            "</td><td><a href='' onclick='deletebooks("+bookList[i].id+")'>删除</a></td></tr>";
+                    }
+                    // 说明获取到了数据
+                    $("#show_table").append("<table border='1px solid black'>" +
+                        "<thead>" +
+                        "<tr>" +
+                        "<th>图书编号</th>" +
+                        "<th>图书名称</th>" +
+                        "<th>图书价格</th>" +
+                        "<th>操作</th>" +
+                        "</tr>" +
+                        "</thead>" +
+                        "<tbody>" +
+                        tr +
+                        "</tbody>" +
+                        "</table>" + "<input type='button' onclick='bookform()' value='添加'>");
+                }
+            });
+        }
+
+        function bookform() {
+            $("#show_table").empty();
+            $("#show_table").append("<form method='post' id='addBooks'>" +
+                "<input type='text' name='bookName'><br/>" +
+                "<input type='number' name='money'/><br/>"+
+                "<input type='button' value='添加' onclick='insert()' >"+
+                "</form>");
+        }
+
+        function insert() {
+            $.ajax({
+                type:"post",
+                url:"/addBooks",
+                dataType:"json",
+                data: $("#addBooks").serialize(),
+                success: function (){
+                    selectBook();
+                },
+            })
+        }
+
+        function deletebooks(id) {
+            $.ajax({
+                type:"post",
+                url:id,
+                data:{"_method":"delete"},
+                success:function () {
+                        alert("删除成功")
+                        selectBook();
+                }
+            })
+        }
+
+    </script>
+</head>
+<body>
+    <div id="show_table"></div>
+</body>
+</html>
