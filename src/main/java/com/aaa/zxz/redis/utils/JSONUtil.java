@@ -6,8 +6,8 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 import java.util.List;
 
 /**
- * @Company AAA软件教育
- * @Author Seven Lee
+ * 
+ * @Author 
  * @Date Create in 2019/7/27 9:29
  * @Description
  *      json转换工具类
@@ -19,7 +19,7 @@ public class JSONUtil {
     private static final ObjectMapper OBJECT_MAPPER = new ObjectMapper();
 
     /**
-     * @author Seven Lee
+     * @author 
      * @description
      *      把对象转换为json字符串
      * @param object
@@ -38,7 +38,7 @@ public class JSONUtil {
     }
 
     /**
-     * @author Seven Lee
+     * @author
      * @description
      *      把json转换为指定的对象
      *      <T>:定义了一个类型
@@ -61,7 +61,7 @@ public class JSONUtil {
     }
 
     /**
-     * @author Seven Lee
+     * @author
      * @description
      *      把Json转换为List集合
      * @param jsonData, beanType
